@@ -4,21 +4,37 @@ Portafolio personal de Josué Gonzales, Full Stack Developer.
 
 ## Stack
 
-- HTML5 + CSS puro (sin frameworks ni build step)
+- HTML5 + Tailwind CSS (compilado, sin CDN)
 - Diseño responsive (mobile-first, breakpoints en 768px y 900px)
 - Google Fonts: Poppins (títulos) + Inter (texto)
 
 ## Estructura
 
-- `index.html` — página completa (HTML + CSS inline)
+- `index.html` — estructura de la página
+- `src/input.css` — fuente de Tailwind (`@tailwind` + clases de componentes con `@apply`)
+- `output.css` — CSS compilado que consume `index.html` (se genera con el build, no editar a mano)
+- `tailwind.config.js` — colores y tipografías personalizadas (paleta JOGO)
 - `jogo-foto-circle.png` — foto de perfil (avatar)
 - `favicon.svg`, `favicon.ico`, `favicon-16.png`, `favicon-32.png`, `apple-touch-icon.png` — íconos del sitio
 - `og-image.png` — imagen de vista previa para redes sociales (Open Graph)
 
-## Ver en local
+## Desarrollo local
 
-Abre `index.html` directamente en el navegador, no requiere servidor ni instalación.
+Requiere Node.js instalado. En la carpeta del proyecto:
+
+```bash
+npm install
+npm run watch
+```
+
+Esto compila `src/input.css` → `output.css` y lo recompila automáticamente cada vez que guardas cambios en `index.html` o `src/input.css`. Abre `index.html` en el navegador para ver los cambios (recarga manual).
+
+Para compilar una sola vez (versión minificada, antes de subir a producción):
+
+```bash
+npm run build
+```
 
 ## Publicar
 
-Este sitio es estático, se puede publicar gratis en GitHub Pages, Vercel o Netlify.
+Este sitio es estático. Después de correr `npm run build`, sube `index.html`, `output.css` y los assets (imágenes/favicons) — no hace falta subir `node_modules`. Ya está publicado en GitHub Pages: https://jogo007.github.io/

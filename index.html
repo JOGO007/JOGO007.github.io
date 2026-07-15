@@ -29,238 +29,47 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0f1419;
-    --primary: #0ea5e9;
-    --secondary: #10b981;
-    --text: #ffffff;
-    --text-muted: #d1d5db;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.5;
-  }
-
-  h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 700; }
-  a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; display: block; }
-
-  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 50;
-    background: rgba(15, 20, 25, 0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-  }
-  .logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 20px; }
-  .logo span { color: var(--primary); }
-  .nav-links { display: flex; gap: 32px; align-items: center; }
-  .nav-links a:not(.nav-cta) { color: var(--text-muted); font-size: 14px; font-weight: 500; }
-  .nav-links a:not(.nav-cta):hover { color: var(--text); }
-  .nav-cta {
-    font-size: 14px; font-weight: 600;
-    padding: 8px 18px; border-radius: 999px;
-    border: 1px solid var(--primary); color: var(--primary);
-  }
-  .nav-cta:hover { background: var(--primary); color: var(--bg); }
-  .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 24px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 30%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(14,165,233,0.15), transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner { position: relative; z-index: 1; max-width: 720px; }
-  .avatar-wrap {
-    width: 240px; height: 240px;
-    border-radius: 50%;
-    margin: 0 auto 28px;
-    padding: 4px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow: 0 0 40px rgba(14,165,233,0.25);
-  }
-  .avatar-wrap img {
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center 15%;
-    background: var(--bg);
-  }
-  .eyebrow { color: var(--secondary); font-weight: 600; margin-bottom: 16px; }
-  .hero h1 { font-size: 56px; line-height: 1.1; margin-bottom: 24px; }
-  .gradient-text {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .hero p { color: var(--text-muted); font-size: 18px; max-width: 560px; margin: 0 auto 40px; }
-  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--primary); color: var(--bg);
-    font-weight: 600; padding: 14px 28px; border-radius: 999px;
-    box-shadow: 0 0 30px rgba(14,165,233,0.25);
-    display: inline-block;
-  }
-  .btn-primary:hover { background: #38bdf8; }
-  .btn-secondary {
-    border: 1px solid rgba(255,255,255,0.2);
-    font-weight: 600; padding: 14px 28px; border-radius: 999px;
-    display: inline-block;
-  }
-  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); }
-
-  /* SECTIONS */
-  section { padding: 96px 0; border-top: 1px solid rgba(255,255,255,0.06); }
-  .section-alt { background: rgba(255,255,255,0.02); }
-  .section-label { color: var(--primary); font-weight: 600; font-size: 13px; letter-spacing: 1.5px; margin-bottom: 12px; }
-  section h2 { font-size: 32px; margin-bottom: 24px; }
-  section > .container > p.lead { color: var(--text-muted); font-size: 18px; max-width: 640px; }
-
-  /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
-  .skill-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; }
-  .skill-card h3 { font-size: 20px; margin-bottom: 4px; }
-  .skill-card h3.dominio { color: var(--secondary); }
-  .skill-card h3.progreso { color: var(--primary); }
-  .skill-card h3.ia {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .skill-card .desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
-  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tag { padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; }
-  .tag-secondary { background: rgba(16,185,129,0.1); color: var(--secondary); border: 1px solid rgba(16,185,129,0.2); }
-  .tag-primary { background: rgba(14,165,233,0.1); color: var(--primary); border: 1px solid rgba(14,165,233,0.2); }
-  .tag-ia {
-    background: linear-gradient(90deg, rgba(14,165,233,0.12), rgba(16,185,129,0.12));
-    color: var(--text);
-    border: 1px solid rgba(14,165,233,0.25);
-  }
-
-  @media (max-width: 900px) {
-    .skills-grid { grid-template-columns: 1fr; }
-  }
-
-  /* PROYECTOS */
-  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
-  .project-card {
-    display: flex; flex-direction: column;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px;
-    padding: 24px;
-    transition: all 0.2s ease;
-  }
-  .project-card:hover { border-color: var(--primary); transform: translateY(-4px); }
-  .project-thumb {
-    width: 100%; height: 120px; border-radius: 12px;
-    background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(16,185,129,0.1));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 36px; margin-bottom: 20px;
-  }
-  .project-card h3 { font-size: 18px; margin-bottom: 8px; }
-  .project-card .desc { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; flex-grow: 1; }
-  .project-link { color: var(--primary); font-size: 14px; font-weight: 600; }
-
-  /* CONTACTO */
-  .contact-section { text-align: center; }
-  .contact-section .container { max-width: 600px; }
-  .contact-section p.lead { margin: 0 auto 40px; }
-  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-  /* FOOTER */
-  footer { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.06); }
-  footer .container {
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px; color: var(--text-muted); font-size: 14px;
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      position: absolute; top: 100%; left: 0; right: 0;
-      background: var(--bg); border-bottom: 1px solid rgba(255,255,255,0.06);
-      flex-direction: column; padding: 24px; gap: 20px;
-      display: none;
-    }
-    .nav-links.open { display: flex; }
-    .nav-toggle { display: block; }
-    .hero h1 { font-size: 38px; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-  }
-</style>
+<link rel="stylesheet" href="output.css">
 </head>
-<body>
+<body class="bg-bg text-text font-body leading-relaxed">
 
-  <nav>
-    <div class="container">
-      <span class="logo">JOGO<span>.</span></span>
-      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#skills">Skills</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#contacto" class="nav-cta">Contáctame</a>
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[rgba(15,20,25,0.85)] backdrop-blur-[8px] border-b border-white/[.06]">
+    <div class="max-w-[1000px] mx-auto px-6 flex justify-between items-center py-4">
+      <span class="font-heading font-extrabold text-xl">JOGO<span class="text-primary">.</span></span>
+      <button class="block md:hidden bg-transparent border-0 text-text text-2xl cursor-pointer" id="navToggle" aria-label="Abrir menú">☰</button>
+      <div class="hidden flex-col gap-5 p-6 absolute top-full inset-x-0 bg-bg border-b border-white/[.06] md:static md:flex md:flex-row md:items-center md:gap-8 md:p-0 md:bg-transparent md:border-0" id="navLinks">
+        <a href="#sobre-mi" class="text-textmuted text-sm font-medium hover:text-text transition-colors">Sobre mí</a>
+        <a href="#skills" class="text-textmuted text-sm font-medium hover:text-text transition-colors">Skills</a>
+        <a href="#proyectos" class="text-textmuted text-sm font-medium hover:text-text transition-colors">Proyectos</a>
+        <a href="#contacto" class="text-textmuted text-sm font-medium hover:text-text transition-colors">Contacto</a>
+        <a href="#contacto" class="text-sm font-semibold px-[18px] py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-bg transition-colors">Contáctame</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="avatar-wrap">
-        <img src="jogo-foto-circle.png" alt="Josué Gonzales">
+  <section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-[120px] pb-20 text-center
+                   before:content-[''] before:absolute before:top-[30%] before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2
+                   before:w-[600px] before:h-[600px] before:pointer-events-none before:-z-10
+                   before:bg-[radial-gradient(circle,rgba(14,165,233,0.15),transparent_70%)]">
+    <div class="relative z-10 max-w-[720px]">
+      <div class="w-60 h-60 rounded-full mx-auto mb-7 p-1 bg-gradient-to-br from-primary to-secondary shadow-[0_0_40px_rgba(14,165,233,0.25)]">
+        <img src="jogo-foto-circle.png" alt="Josué Gonzales" class="w-full h-full rounded-full object-cover object-[center_15%] bg-bg">
       </div>
-      <p class="eyebrow">👋 Hola, soy Josué Gonzales</p>
-      <h1>Full Stack <span class="gradient-text">Developer</span></h1>
-      <p>Ingeniero de Sistemas apasionado por construir experiencias web modernas, rápidas y bien diseñadas — de principio a fin.</p>
-      <div class="hero-buttons">
-        <a href="#proyectos" class="btn-primary">Ver proyectos</a>
-        <a href="#contacto" class="btn-secondary">Contáctame</a>
+      <p class="text-secondary font-semibold mb-4">👋 Hola, soy Josué Gonzales</p>
+      <h1 class="text-[38px] md:text-[56px] leading-[1.1] mb-6">Full Stack <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Developer</span></h1>
+      <p class="text-textmuted text-lg max-w-[560px] mx-auto mb-10">Ingeniero de Sistemas apasionado por construir experiencias web modernas, rápidas y bien diseñadas — de principio a fin.</p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="#proyectos" class="bg-primary text-bg font-semibold px-7 py-3.5 rounded-full inline-block shadow-[0_0_30px_rgba(14,165,233,0.25)] hover:bg-sky-400 transition-colors">Ver proyectos</a>
+        <a href="#contacto" class="border border-white/20 font-semibold px-7 py-3.5 rounded-full inline-block hover:border-white/50 transition-colors">Contáctame</a>
       </div>
     </div>
   </section>
 
-  <section id="sobre-mi">
-    <div class="container">
-      <p class="section-label">SOBRE MÍ</p>
-      <h2>Ingeniero de Sistemas, developer por vocación</h2>
-      <p class="lead">
+  <section id="sobre-mi" class="py-24 border-t border-white/[.06]">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <p class="text-primary font-semibold text-[13px] tracking-[1.5px] mb-3">SOBRE MÍ</p>
+      <h2 class="text-[32px] mb-6">Ingeniero de Sistemas, developer por vocación</h2>
+      <p class="text-textmuted text-lg max-w-[640px]">
         Soy Josué Gonzales, Ingeniero de Sistemas titulado y desarrollador Full Stack especializado en JavaScript.
         Me apasiona transformar ideas en productos web funcionales, con foco en código limpio, buena experiencia de usuario
         y aprendizaje constante de nuevas tecnologías. Integro herramientas de IA como Claude en mi flujo de trabajo
@@ -269,84 +78,87 @@
     </div>
   </section>
 
-  <section id="skills" class="section-alt">
-    <div class="container">
-      <p class="section-label">SKILLS</p>
-      <h2>Tecnologías con las que trabajo</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3 class="dominio">Dominio</h3>
-          <p class="desc">Tecnologías que uso con confianza a diario</p>
-          <div class="tag-list">
-            <span class="tag tag-secondary">JavaScript</span>
-            <span class="tag tag-secondary">HTML5</span>
-            <span class="tag tag-secondary">CSS</span>
-            <span class="tag tag-secondary">Tailwind CSS</span>
+  <section id="skills" class="py-24 border-t border-white/[.06] bg-white/[.02]">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <p class="text-primary font-semibold text-[13px] tracking-[1.5px] mb-3">SKILLS</p>
+      <h2 class="text-[32px] mb-6">Tecnologías con las que trabajo</h2>
+      <div class="grid grid-cols-1 tab:grid-cols-3 gap-6 mt-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <h3 class="text-xl mb-1 text-secondary">Dominio</h3>
+          <p class="text-textmuted text-sm mb-5">Tecnologías que uso con confianza a diario</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-secondary/10 text-secondary border border-secondary/20">JavaScript</span>
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-secondary/10 text-secondary border border-secondary/20">HTML5</span>
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-secondary/10 text-secondary border border-secondary/20">CSS</span>
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-secondary/10 text-secondary border border-secondary/20">Tailwind CSS</span>
           </div>
         </div>
-        <div class="skill-card">
-          <h3 class="progreso">En progreso</h3>
-          <p class="desc">Tecnologías que estoy profundizando</p>
-          <div class="tag-list">
-            <span class="tag tag-primary">React</span>
-            <span class="tag tag-primary">Node.js</span>
-            <span class="tag tag-primary">Bases de Datos</span>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <h3 class="text-xl mb-1 text-primary">En progreso</h3>
+          <p class="text-textmuted text-sm mb-5">Tecnologías que estoy profundizando</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">React</span>
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">Node.js</span>
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">Bases de Datos</span>
           </div>
         </div>
-        <div class="skill-card">
-          <h3 class="ia">Herramientas IA</h3>
-          <p class="desc">IA integrada en mi flujo de trabajo</p>
-          <div class="tag-list">
-            <span class="tag tag-ia">Claude</span>
-            <span class="tag tag-ia">GitHub Copilot</span>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <h3 class="text-xl mb-1 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Herramientas IA</h3>
+          <p class="text-textmuted text-sm mb-5">IA integrada en mi flujo de trabajo</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-primary/[.12] to-secondary/[.12] text-text border border-primary/[.25]">Claude</span>
+            <span class="px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-primary/[.12] to-secondary/[.12] text-text border border-primary/[.25]">GitHub Copilot</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="proyectos">
-    <div class="container">
-      <p class="section-label">PROYECTOS</p>
-      <h2>Proyectos destacados</h2>
-      <div class="projects-grid">
-        <a href="https://github.com/JOGO007/Administrador_Clientes" target="_blank" rel="noopener" class="project-card">
-          <div class="project-thumb">🗂️</div>
-          <h3>Administrador_Clientes</h3>
-          <p class="desc">App web para registrar, editar y eliminar clientes usando JavaScript y almacenamiento IndexedDB.</p>
-          <span class="project-link">Ver en GitHub →</span>
+  <section id="proyectos" class="py-24 border-t border-white/[.06]">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <p class="text-primary font-semibold text-[13px] tracking-[1.5px] mb-3">PROYECTOS</p>
+      <h2 class="text-[32px] mb-6">Proyectos destacados</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <a href="https://github.com/JOGO007/Administrador_Clientes" target="_blank" rel="noopener"
+           class="flex flex-col bg-white/5 border border-white/10 rounded-2xl p-6 transition-all duration-200 hover:border-primary hover:-translate-y-1">
+          <div class="w-full h-[120px] rounded-xl bg-gradient-to-br from-primary/20 to-secondary/10 flex items-center justify-center text-4xl mb-5">🗂️</div>
+          <h3 class="text-lg mb-2">Administrador_Clientes</h3>
+          <p class="text-textmuted text-sm mb-4 flex-grow">App web para registrar, editar y eliminar clientes usando JavaScript y almacenamiento IndexedDB.</p>
+          <span class="text-primary text-sm font-semibold">Ver en GitHub →</span>
         </a>
-        <a href="https://github.com/JOGO007/Gasto_Semanal" target="_blank" rel="noopener" class="project-card">
-          <div class="project-thumb">💰</div>
-          <h3>Gasto_Semanal</h3>
-          <p class="desc">App para administrar presupuestos personales desarrollada con JavaScript y clases.</p>
-          <span class="project-link">Ver en GitHub →</span>
+        <a href="https://github.com/JOGO007/Gasto_Semanal" target="_blank" rel="noopener"
+           class="flex flex-col bg-white/5 border border-white/10 rounded-2xl p-6 transition-all duration-200 hover:border-primary hover:-translate-y-1">
+          <div class="w-full h-[120px] rounded-xl bg-gradient-to-br from-primary/20 to-secondary/10 flex items-center justify-center text-4xl mb-5">💰</div>
+          <h3 class="text-lg mb-2">Gasto_Semanal</h3>
+          <p class="text-textmuted text-sm mb-4 flex-grow">App para administrar presupuestos personales desarrollada con JavaScript y clases.</p>
+          <span class="text-primary text-sm font-semibold">Ver en GitHub →</span>
         </a>
-        <a href="https://github.com/JOGO007/Enfocado" target="_blank" rel="noopener" class="project-card">
-          <div class="project-thumb">✅</div>
-          <h3>Enfocado</h3>
-          <p class="desc">App de recordatorios con HTML, CSS y JavaScript. Ayuda a organizar tareas y pendientes de forma sencilla.</p>
-          <span class="project-link">Ver en GitHub →</span>
+        <a href="https://github.com/JOGO007/Enfocado" target="_blank" rel="noopener"
+           class="flex flex-col bg-white/5 border border-white/10 rounded-2xl p-6 transition-all duration-200 hover:border-primary hover:-translate-y-1">
+          <div class="w-full h-[120px] rounded-xl bg-gradient-to-br from-primary/20 to-secondary/10 flex items-center justify-center text-4xl mb-5">✅</div>
+          <h3 class="text-lg mb-2">Enfocado</h3>
+          <p class="text-textmuted text-sm mb-4 flex-grow">App de recordatorios con HTML, CSS y JavaScript. Ayuda a organizar tareas y pendientes de forma sencilla.</p>
+          <span class="text-primary text-sm font-semibold">Ver en GitHub →</span>
         </a>
       </div>
     </div>
   </section>
 
-  <section id="contacto" class="section-alt contact-section">
-    <div class="container">
-      <p class="section-label">CONTACTO</p>
-      <h2>Hablemos</h2>
-      <p class="lead">¿Tienes un proyecto en mente o una oportunidad? Escríbeme.</p>
-      <div class="contact-buttons">
-        <a href="https://github.com/JOGO007" target="_blank" rel="noopener" class="btn-secondary">GitHub</a>
-        <a href="https://www.linkedin.com/in/josu%C3%A9-luis-gonzales-sinuiri-615815146/" target="_blank" rel="noopener" class="btn-secondary">LinkedIn</a>
-        <a href="mailto:josuel.gonza.1995@gmail.com" class="btn-primary">Email</a>
+  <section id="contacto" class="py-24 border-t border-white/[.06] bg-white/[.02] text-center">
+    <div class="max-w-[600px] mx-auto px-6">
+      <p class="text-primary font-semibold text-[13px] tracking-[1.5px] mb-3">CONTACTO</p>
+      <h2 class="text-[32px] mb-6">Hablemos</h2>
+      <p class="text-textmuted text-lg max-w-[640px] mx-auto mb-10">¿Tienes un proyecto en mente o una oportunidad? Escríbeme.</p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="https://github.com/JOGO007" target="_blank" rel="noopener" class="border border-white/20 font-semibold px-7 py-3.5 rounded-full inline-block hover:border-white/50 transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/josu%C3%A9-luis-gonzales-sinuiri-615815146/" target="_blank" rel="noopener" class="border border-white/20 font-semibold px-7 py-3.5 rounded-full inline-block hover:border-white/50 transition-colors">LinkedIn</a>
+        <a href="mailto:josuel.gonza.1995@gmail.com" class="bg-primary text-bg font-semibold px-7 py-3.5 rounded-full inline-block shadow-[0_0_30px_rgba(14,165,233,0.25)] hover:bg-sky-400 transition-colors">Email</a>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="container">
+  <footer class="py-8 border-t border-white/[.06]">
+    <div class="max-w-[1000px] mx-auto px-6 flex justify-between items-center flex-wrap gap-3 text-textmuted text-sm">
       <span>© 2026 Josué Gonzales (JOGO)</span>
       <span>Full Stack Developer · JS · React · Node.js</span>
     </div>
@@ -354,7 +166,7 @@
 
   <script>
     document.getElementById('navToggle').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('navLinks').classList.toggle('hidden');
     });
   </script>
 

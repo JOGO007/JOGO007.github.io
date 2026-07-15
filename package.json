@@ -1,0 +1,13 @@
+{
+  "name": "jogo-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page portafolio de Josué Gonzales (JOGO)",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./output.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
